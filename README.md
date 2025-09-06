@@ -28,6 +28,14 @@ These tools were developed by [Michael Marinaccio](https://github.com/mnmarinacc
 Please refer to the documentation, found [here](/Documentation.md), for any syntax or code-related questions.
 
 ## Requirements
+- matplotlib==3.7.5
+- numpy==1.24.4
+- Pillow==10.4.0
+- scipy==1.10.0
+- scikit-image==0.21.0
+- torch==2.4.1
+- torchvision==0.19.1
+
 
 ## Installation
 git clone https://github.com/mnmarinaccio/FLAME3_ThresholdingUtils.git <br />
