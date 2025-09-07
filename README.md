@@ -1,6 +1,6 @@
 # FLAME 3 - Wildfire Thresholding Utilities
 
-This repository contains utilities and Jupyter Notebook examples, which can be used for leveraging the radiometric TIFF data and Thermal JPG imagery included in the aerial (drone-collected) multispectral wildfire imagery dataset, [FLAME 3](https://ieee-dataport.org/open-access/flame-3-radiometric-thermal-uav-imagery-wildfire-management), based on the [FLAME 3 Paper](https://arxiv.org/abs/2412.02831). The tools found in this repository are implementations of different thresholding techniques, but also include some supplemental functions for handling the radiometric TIFF data.
+This repository contains utilities and Jupyter Notebook examples, which can be used for leveraging the radiometric TIFF data and Thermal JPG imagery included in the aerial (drone-collected) multispectral wildfire imagery dataset, [FLAME 3](https://ieee-dataport.org/open-access/flame-3-radiometric-thermal-uav-imagery-wildfire-management), based on the [FLAME 3 Paper](https://arxiv.org/abs/2412.02831). The tools found in this repository are implementations of different thresholding techniques, but also include some supplemental functions for handling the radiometric TIFF data. There is also an example of basic calibration of the radiometric TIFF data.
 
 These tools were developed by [Michael Marinaccio](https://github.com/mnmarinaccio) and used for work from the [SAM-TIFF Paper](https://arxiv.org/abs/2505.01638). The implementation for SAM-TIFF is found [here](https://arxiv.org/abs/2505.01638).
 
