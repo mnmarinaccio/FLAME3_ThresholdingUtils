@@ -39,10 +39,12 @@ These tools were developed by [Michael Marinaccio](https://github.com/mnmarinacc
 </table>
 
 
-<figure style="text-align:center;">
-  <img src="./output_folders/Wilamette_GT/Labels_Colored/00001.png" alt="Uncalibrated Thermal JPG" width="400"/>
-  <figcaption><strong>Multi-Class Labeled TIFF (Colormap Visualization)</strong></figcaption>
-</figure>
+<div style="text-align:center;">
+  <figure>
+    <img src="./output_folders/Wilamette_GT/Labels_Colored/00001.png" alt="Multi-Class Labeled TIFF" width="400"/>
+    <figcaption><strong>Multi-Class Labeled TIFF (Colormap Visualization)</strong></figcaption>
+  </figure>
+</div>
 
 ---
 
@@ -89,3 +91,14 @@ from utils.TIFF_Utilities import * <br />
 
 ## License
 This project is licensed under the Apache 2.0 License. See the LICENSE file for details.
+
+If you use these tools in your project, please cite this repository and the paper the tools were made for
+
+@misc{marinaccio2025seeing,
+    title={Seeing Heat with Color -- RGB-Only Wildfire Temperature Inference from SAM-Guided Multimodal Distillation using Radiometric Ground Truth},
+    author={Michael Marinaccio and Fatemeh Afghah},
+    year={2025},
+    eprint={2505.01638},
+    archivePrefix={arXiv},
+    primaryClass={eess.IV}
+}
