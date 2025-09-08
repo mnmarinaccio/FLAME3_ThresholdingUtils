@@ -91,9 +91,9 @@ from utils.ThresholdingUtils import * <br />
 from utils.TIFF_Utilities import * <br />
 
 ## License
-This project is licensed under the Apache 2.0 License. See the LICENSE file for details.
+This repository is licensed under [CC BY-NC 4.0](LICENSE).
 
-If you use these tools in your project, please cite this repository and the paper the tools were made for
+If you use these tools in your project, please cite this repository and the paper the tools were made for.
 
 @misc{marinaccio2025seeing,
     title={Seeing Heat with Color -- RGB-Only Wildfire Temperature Inference from SAM-Guided Multimodal Distillation using Radiometric Ground Truth},
