@@ -3,9 +3,9 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
-def rangeLabel(tiffSampleArray, fireBoundaries, fire_rows, fire_cols, fire_values, height, width):
+def rangeLabel(tiffSampleArray, fireBoundaries, fire_rows, fire_cols, fire_values, height, width, labelTolerance=0.3):
     labels = []
-    tolerance = 0.3
+    tolerance = labelTolerance
     # Go through each fire region value and label
     for val in fire_values:
         labeled = False
