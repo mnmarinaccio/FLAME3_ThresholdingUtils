@@ -38,13 +38,12 @@ These tools were developed by [Michael Marinaccio](https://github.com/mnmarinacc
   </tr>
 </table>
 
-
 <div style="text-align:center;">
-  <figure>
-    <img src="./output_folders/Wilamette_GT/Labels_Colored/00001.png" alt="Multi-Class Labeled TIFF" width="400"/>
-    <figcaption><strong>Multi-Class Labeled TIFF (Colormap Visualization)</strong></figcaption>
-  </figure>
+  <img src="./output_folders/Wilamette_GT/Labels_Colored/00001.png" alt="Multi-Class Labeled TIFF" width="400"/>
+  <p><strong>Multi-Class Labeled TIFF (Colormap Visualization)</strong></p>
 </div>
+
+
 
 ---
 
