@@ -62,6 +62,8 @@ These tools were developed by [Michael Marinaccio](https://github.com/mnmarinacc
 Please refer to the documentation, found [here](/Documentation.md), for any syntax or code-related questions.
 
 ## Requirements
+Python 3.8.20 was used for this implementation
+
 - matplotlib==3.7.5
 - numpy==1.24.4
 - Pillow==10.4.0
