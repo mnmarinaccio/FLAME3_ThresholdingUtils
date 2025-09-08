@@ -1,6 +1,15 @@
 # FLAME 3 - Wildfire Thresholding Utilities
 
-This repository contains utilities and Jupyter Notebook examples, which can be used for leveraging the radiometric TIFF data and Thermal JPG imagery included in the aerial (drone-collected) multispectral wildfire imagery dataset, [FLAME 3](https://ieee-dataport.org/open-access/flame-3-radiometric-thermal-uav-imagery-wildfire-management), based on the [FLAME 3 Paper](https://arxiv.org/abs/2412.02831). The tools found in this repository are implementations of different thresholding techniques, but also include some supplemental functions for handling the radiometric TIFF data. There is also an example of basic calibration of the radiometric TIFF data.
+This repository contains utilities and Jupyter Notebook examples, which can be used for leveraging the radiometric TIFF data and Thermal JPG imagery included in the aerial (drone-collected) multispectral wildfire imagery dataset, [FLAME 3](https://ieee-dataport.org/open-access/flame-3-radiometric-thermal-uav-imagery-wildfire-management), based on the [FLAME 3 Paper](https://arxiv.org/abs/2412.02831). The tools found in this repository allow for applying thresholding techniques to TIFF files, applying a standard temperature calibration template, multi-class labeling based on TIFF temperature data, and other useful utilities for handling the radiometric data.
+
+There are three Jupyter Notebooks included with examples, and they cover the following:
+- `ThresholdingUtilsUsage.ipynb`
+  - Showcases different thresholding techniques (binary, hysteresis, and Otsu's Method), applied to an indiviudal image or an entire folder of images.
+- `TIFFCalibration.ipynb`
+  - Showcases TIFF calibration (needed due to saturation of thermal cameras during data collection), recreation and copy of EXIF metadata of thermal JPGs, and a side-by-side visualization of the before and after.
+- `TIFFLabelingUsage.ipynb`
+  - Showcases the TIFF Labeling tools for multi-class labeling based on temperature data and colorizing for easy visualization.
+
 
 These tools were developed by [Michael Marinaccio](https://github.com/mnmarinaccio) and used for work from the [SAM-TIFF Paper](https://arxiv.org/abs/2505.01638). The implementation for SAM-TIFF is found [here](https://arxiv.org/abs/2505.01638).
 
@@ -10,6 +19,30 @@ These tools were developed by [Michael Marinaccio](https://github.com/mnmarinacc
 <p align="center">
   <img src="readme_images/imgbinary.PNG" alt="Thresholded Images" />
 </p>
+
+
+<table align="center">
+  <tr>
+    <td style="text-align:center;">
+      <figure>
+        <img src="./data/Images_Sycan/Thermal/00006.JPG" alt="Uncalibrated Thermal JPG" width="300"/>
+        <figcaption><strong>Uncalibrated Thermal JPG</strong></figcaption>
+      </figure>
+    </td>
+    <td style="text-align:center;">
+      <figure>
+        <img src="./output_folders/Sycan_CalibratedThermalJPG/00006.JPG" alt="Calibrated Thermal JPG" width="300"/>
+        <figcaption><strong>Calibrated Thermal JPG</strong></figcaption>
+      </figure>
+    </td>
+  </tr>
+</table>
+
+
+<figure style="text-align:center;">
+  <img src="./output_folders/Wilamette_GT/Labels_Colored/00001.png" alt="Uncalibrated Thermal JPG" width="400"/>
+  <figcaption><strong>Multi-Class Labeled TIFF (Colormap Visualization)</strong></figcaption>
+</figure>
 
 ---
 
