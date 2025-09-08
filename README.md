@@ -11,7 +11,7 @@ There are three Jupyter Notebooks included with examples, and they cover the fol
   - Showcases the TIFF Labeling tools for multi-class labeling based on temperature data and colorizing for easy visualization.
 
 
-These tools were developed by [Michael Marinaccio](https://github.com/mnmarinaccio) and used for work from the [SAM-TIFF Paper](https://arxiv.org/abs/2505.01638). The implementation for SAM-TIFF is found [here](https://arxiv.org/abs/2505.01638).
+These tools were developed by [Michael Marinaccio](https://github.com/mnmarinaccio) and used for work from the [SAM-TIFF Paper](https://arxiv.org/abs/2505.01638). The implementation for SAM-TIFF is found [here](https://github.com/mnmarinaccio/SAM-TIFF).
 
 <p align="center">
   <img src="readme_images/imgoriginal.PNG" alt="Paired RGB and Thermal Image" />
