@@ -19,12 +19,11 @@
       - [Function: `tiff_binary_folder_convert()` ](#function-tiff_binary_folder_convert-)
       - [Function: `tiff_convert_to_greyscale()` ](#function-tiff_convert_to_greyscale-)
     - [`TIFF_Labeling_Utilities.py`](#tiff_labeling_utilitiespy)
-      - [Function: `rangeLabel()`](#function-rangelabel)
-      - [Function: `divideRange()`](#function-dividerange)
-      - [Function: `labelTiff()`](#function-labeltiff)
-      - [Function: `apply_colormap_and_save()`](#function-apply_colormap_and_save)
-      - [Function: `checkLabels()`](#function-checklabels)
-
+      - [Function: `rangeLabel()` ](#function-rangelabel-)
+      - [Function: `divideRange()` ](#function-dividerange-)
+      - [Function: `labelTiff()` ](#function-labeltiff-)
+      - [Function: `apply_colormap_and_save()` ](#function-apply_colormap_and_save-)
+      - [Function: `checkLabels()` ](#function-checklabels-)
   - [License](#license)
 
 ---
