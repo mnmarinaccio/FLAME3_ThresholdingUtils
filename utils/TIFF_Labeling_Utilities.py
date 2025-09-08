@@ -73,8 +73,8 @@ def divideRange(fireValues, num_classes, decimal_places=14, verbose=False):
     boundaries = [round(minFire + i * intervalFire, decimal_places) for i in range(num_classes + 1)]
     return boundaries
     
-def labelTiff(tiffSamplePath, tiffBinaryPath, num_classes, height, width, verbose=False):
-    
+def labelTiff(tiffSamplePath, tiffBinaryPath, num_classes, height, width, labelTolerance=0.3, verbose=False):
+    tolerance = labelTolerance
     print(f'Labeling {tiffSamplePath}')
     # open image
     tiffSample = Image.open(tiffSamplePath)
@@ -112,7 +112,7 @@ def labelTiff(tiffSamplePath, tiffBinaryPath, num_classes, height, width, verbos
     if verbose:
         print(f'FIRE RANGES = {fireBoundaries}')
     
-    tiffSampleArray = rangeLabel(tiffSampleArray, fireBoundaries, fire_rows, fire_cols, fireValues, height, width)
+    tiffSampleArray = rangeLabel(tiffSampleArray, fireBoundaries, fire_rows, fire_cols, fireValues, height, width, labelTolerance=tolerance)
     if verbose:
         print()
     return tiffSampleArray
