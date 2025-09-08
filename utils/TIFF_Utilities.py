@@ -180,3 +180,29 @@ def tiff_convert_to_greyscale(input_image_path, output_image_path, display=True,
 
     
         return tiff_grey_image
+    
+def analyzeTiff(image_path):
+    
+    if 'Sycan2A' in image_path:
+        print('SYCAN2A TIFF DETAILS')
+    elif 'Sycan2D' in image_path:
+        print('SYCAN2D TIFF DETAILS')
+    elif 'Shoetank' in image_path:
+        print('SHOETANK TIFF DETAILS')
+    elif 'Wilamette' in image_path:
+        print('WILAMETTE TIFF DETAILS')
+    elif 'Sycan' in image_path:
+        print(f'SYCAN TIFF DETAILS')
+        
+    # open image
+    thermal_image = Image.open(image_path)
+    # convert to numpy array 
+    thermal_array = np.array(thermal_image)
+
+
+    print(f'SHAPE: {thermal_array.shape}')
+    print(f'ABSOLUTE MIN VALUE: {np.amin(thermal_array)}')
+    print(f'ABSOLUTE MAX VALUE: {np.amax(thermal_array)}')
+    
+    print('')
+    return thermal_array
