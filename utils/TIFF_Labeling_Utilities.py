@@ -150,11 +150,6 @@ def checkLabels(image_path, num_classes):
     thermal_image = Image.open(image_path)
     # convert to numpy array 
     thermal_array = np.array(thermal_image)
-
-
-    # print(f'SHAPE: {thermal_array.shape}')
-    # print(f'ABSOLUTE MIN VALUE: {np.amin(thermal_array)}')
-    # print(f'ABSOLUTE MAX VALUE: {np.amax(thermal_array)}')
     
     if np.amax(thermal_array) > num_classes or np.amin(thermal_array) != 0:
         print(f'{image_path} NOT LABELED PROPERLY')

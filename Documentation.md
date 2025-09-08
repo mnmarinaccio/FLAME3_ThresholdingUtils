@@ -18,6 +18,13 @@
       - [Function: `tiff_binary_image_convert()` ](#function-tiff_binary_image_convert-)
       - [Function: `tiff_binary_folder_convert()` ](#function-tiff_binary_folder_convert-)
       - [Function: `tiff_convert_to_greyscale()` ](#function-tiff_convert_to_greyscale-)
+    - [`TIFF_Labeling_Utilities.py`](#tiff_labeling_utilitiespy)
+      - [Function: `rangeLabel()`](#function-rangelabel)
+      - [Function: `divideRange()`](#function-dividerange)
+      - [Function: `labelTiff()`](#function-labeltiff)
+      - [Function: `apply_colormap_and_save()`](#function-apply_colormap_and_save)
+      - [Function: `checkLabels()`](#function-checklabels)
+
   - [License](#license)
 
 ---
@@ -402,6 +409,188 @@ Converts a TIFF (or other supported) image to **grayscale**, optionally displays
   Optionally displays the grayscale image using matplotlib if `display=True`.  
 
 ---
+
+### `TIFF_Labeling_Utilities.py`
+
+#### Function: `rangeLabel()` <br />  
+`rangeLabel(tiffSampleArray, fireBoundaries, fire_rows, fire_cols, fire_values, height, width, labelTolerance=0.3)` <br />  
+
+Labels a thermal image array based on **predefined value ranges** and assigns class IDs to each pixel. Fire pixels are labeled according to the range they fall into, while all non-fire pixels are assigned the **background class (0)**. A tolerance can be specified to allow small deviations at the boundaries.  
+
+Arguments
+- **`tiffSampleArray`** *(np.ndarray)*  
+  The original image array (height × width) containing pixel values to be labeled.  
+
+- **`fireBoundaries`** *(list of float)*  
+  List of numeric boundaries defining the class ranges for labeling. Length should be `num_classes + 1`.  
+
+- **`fire_rows`** *(np.ndarray or list)*  
+  Row indices of the fire pixels (typically obtained from a thresholded binary image).  
+
+- **`fire_cols`** *(np.ndarray or list)*  
+  Column indices of the fire pixels.  
+
+- **`fire_values`** *(np.ndarray or list)*  
+  The corresponding pixel values of the fire pixels used to determine the class label.  
+
+- **`height`** *(int)*  
+  Height of the full image.  
+
+- **`width`** *(int)*  
+  Width of the full image.  
+
+- **`labelTolerance`** *(float, default=0.3)*  
+  Optional tolerance added to the upper boundary of the last class to ensure edge values are included.  
+
+Inputs
+- **Type:** `np.ndarray`, `list`, `float`, `int`  
+- **Description:** The function operates on the image array and pixel indices, using numeric ranges to assign class labels.  
+
+Outputs
+- **`tiffSampleArray`** *(np.ndarray)*  
+  The labeled image array with class IDs:  
+  - Fire pixels are assigned labels `1…num_classes` according to their value ranges.  
+  - All other pixels are assigned `0` (background).  
+
+Notes
+- Prints a warning if a value does not fall within any range.  
+- Prints an error if a computed label exceeds the number of classes.
+
+---
+
+#### Function: `divideRange()` <br />  
+`divideRange(fireValues, num_classes, decimal_places=14, verbose=False)` <br />  
+
+Divides a set of fire pixel values into **evenly spaced class ranges** for labeling. Computes the minimum, maximum, and interval, then generates a list of boundaries to be used for assigning class IDs.  
+
+Arguments
+- **`fireValues`** *(np.ndarray or list)*  
+  Array or list of pixel values representing fire regions in the image.  
+
+- **`num_classes`** *(int)*  
+  Number of classes to divide the fire values into.  
+
+- **`decimal_places`** *(int, default=14)*  
+  Number of decimal places to round the computed boundaries.  
+
+- **`verbose`** *(bool, default=False)*  
+  If `True`, prints detailed information about min, max, range, and interval of fire values.  
+
+Inputs
+- **Type:** `np.ndarray`, `list`, `int`, `bool`  
+- **Description:** The function takes the pixel values of fire regions and calculates numeric boundaries for class labels.  
+
+Outputs
+- **`boundaries`** *(list of float)*  
+  A list of `num_classes + 1` numeric boundaries representing the intervals for each class.  
+
+Notes
+- The boundaries are **evenly spaced** from the minimum to the maximum fire value.  
+- Can be used in combination with `rangeLabel()` to assign class IDs to each pixel.
+
+---
+
+#### Function: `labelTiff()` <br />  
+`labelTiff(tiffSamplePath, tiffBinaryPath, num_classes, height, width, labelTolerance=0.3, verbose=False)` <br />  
+
+Labels a TIFF image based on pixel intensity ranges and a thresholded binary mask. Combines `divideRange()` and `rangeLabel()` to assign class IDs to fire pixels while assigning **0 to non-fire pixels**.  
+
+Arguments
+- **`tiffSamplePath`** *(str)*  
+  Path to the TIFF image containing the raw thermal or intensity values.  
+
+- **`tiffBinaryPath`** *(str)*  
+  Path to the thresholded binary TIFF image indicating fire pixels (255 for fire, 0 for background).  
+
+- **`num_classes`** *(int)*  
+  Number of classes (including fire intensity ranges) to label the fire pixels.  
+
+- **`height`** *(int)*  
+  Height of the full image.  
+
+- **`width`** *(int)*  
+  Width of the full image.  
+
+- **`labelTolerance`** *(float, default=0.3)*  
+  Tolerance added to the upper boundary of the last class to ensure edge values are included.  
+
+- **`verbose`** *(bool, default=False)*  
+  If `True`, prints detailed information about image shape, min/max values, and fire boundaries.  
+
+Inputs
+- **Type:** `str`, `int`, `float`, `bool`  
+- **Description:** The function reads the sample and binary TIFF images, determines fire pixel locations, and calculates class boundaries for labeling.  
+
+Outputs
+- **`tiffSampleArray`** *(np.ndarray)*  
+  A labeled image array of the same size as the input TIFF:  
+  - Fire pixels are assigned integer class IDs `1…num_classes` according to their intensity ranges.  
+  - Non-fire pixels are assigned `0` (background).  
+
+Notes
+- Internally calls `divideRange()` to compute class boundaries.  
+- Internally calls `rangeLabel()` to assign labels based on the boundaries.  
+- Prints warnings for any fire pixel values that do not fit into a class range.
+
+---
+
+#### Function: `apply_colormap_and_save()` <br />
+`apply_colormap_and_save(input_filename, output_filename, num_classes)` <br />
+
+Applies a **consistent color mapping** to a labeled image and saves it as a colored PNG. Ensures that the **same class ID always maps to the same color**, with the background (class 0) set to black.  
+
+Arguments
+- **`input_filename`** *(str)*  
+  Path to the labeled input image (PNG) containing integer class IDs from 0 to `num_classes - 1`.  
+
+- **`output_filename`** *(str)*  
+  Path where the resulting colored PNG will be saved.  
+
+- **`num_classes`** *(int)*  
+  Total number of classes, including the background class (0).  
+
+Inputs
+- **Type:** `str`, `int`  
+- **Description:** The function reads a labeled PNG image where pixel values indicate class IDs.  
+
+Outputs
+- **Colored PNG file** saved to `output_filename`  
+  - Each pixel’s class ID is mapped to a consistent color.  
+  - The output image is in **RGBA format**, with the background class (0) as black.  
+
+Notes
+- Can be used on a **single image or a batch of images**, producing consistent coloring across all outputs.  
+- Uses `matplotlib`’s colormaps internally to assign colors.
+
+---
+
+#### Function: `checkLabels()` <br />  
+`checkLabels(image_path, num_classes)` <br />  
+
+Verifies that a labeled image contains valid class IDs within the expected range. Checks that all pixel values are between **0** (background) and `num_classes` (inclusive) and prints a message indicating whether the image is labeled correctly.  
+
+Arguments
+- **`image_path`** *(str)*  
+  Path to the labeled image (PNG or TIFF) to be checked.  
+
+- **`num_classes`** *(int)*  
+  Total number of classes (including the background class 0).  
+
+Inputs
+- **Type:** `str`, `int`  
+- **Description:** The function reads the labeled image and converts it to a NumPy array for validation.  
+
+Outputs
+- **`thermal_array`** *(np.ndarray)*  
+  The NumPy array representation of the labeled image.  
+
+Notes
+- Prints `LABELED CORRECTLY` if all pixel values are in `0…num_classes`.  
+- Prints `NOT LABELED PROPERLY` if any pixel value falls outside this range.  
+- Can be used as a **sanity check** after labeling or applying a colormap.
+
+---
+
 
 ## License
 This project is licensed under the Apache 2.0 License. See the LICENSE file for details.
